@@ -26,5 +26,6 @@ Módulo TM1637 com Display 7 Segmentos 4 Dígitos |	`R$:  18,90`
 LED RGB x10 WS2812B 5050 Endereçável |	`R$:  26,90`
 Módulo Cartão Micro SD |	`R$:   8,90`
 LED Emissor Infravermelho IR 5mm |	`R$:   1,40`
-Cabo Flat Colorido 1m 20 vias Jumper Premium |	`R$:  15,90`
 Módulo Buzzer 5V Passivo |	`R$:   7,90`
+
+> _*Motor e Carcaça foi reutilizado de um brinquedo defeituoso_
