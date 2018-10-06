@@ -7,7 +7,7 @@
 /*
  * Configuração do WIFI
  */
-void RCwifi::Config() {
+void RCwifi::ConfigWifi() {
 	RCwifi::Init();
 	RCwifi::AttempConection();
 
@@ -22,7 +22,6 @@ void RCwifi::Config() {
 void RCwifi::Init(){
 	Serial.print("Started");
 	delay(1000);
-	Serial.begin(115200);
 }
 /*
  * Buscar por pontos de wifi
@@ -32,8 +31,14 @@ void RCwifi::AttempConection() {
 	Serial.print("\nTrying to connect to a wifi network...");
 
 	for(int i=0, j=MAX_ACESSPOINTS; i < j; i++)
+	{
+		char string[60];
+		sprintf(string, "\n[%2d/%2d]", i,j);
+		Serial.print(string);
+
 		if(RCwifi::Connect(APssid[i],APpswd[i]))
 			break;
+	}
 }
 /*
  * Ancorar AcessPoint
@@ -54,10 +59,10 @@ void RCwifi::Host(){
 int RCwifi::Connect(char ssid[20], char password[20]){
 	WiFi.begin(ssid, password);
 	
-	char string[60];
-	sprintf(string, "\n[%2d/%2d] Connecting to wifi %s ", i,j, APssid[i]);
-	Serial.print(string);
+	Serial.print("Connecting to wifi ");
+	Serial.print(ssid);
 
+	WifiAPmode=false;
 	unsigned long attempt = millis();
 
 	while (WiFi.status() != WL_CONNECTED && millis() <  (attempt + 800) ){
@@ -68,7 +73,7 @@ int RCwifi::Connect(char ssid[20], char password[20]){
 	if(WiFi.status() != WL_CONNECTED)
 	{
 		Serial.print("\n!!! SUCESS !!!");
-		return !WifiAPmode=false;
+		return 1;
 	}
 	return 0;
 }
@@ -83,5 +88,7 @@ void RCwifi::ShowIP(){
 /*
  * Modo Ancorado Ativo 
  */
-bool RCwifi::IsHostedAP()
+bool RCwifi::IsHostedAP(){
 	return WifiAPmode;	
+}
+
